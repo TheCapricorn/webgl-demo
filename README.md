@@ -1,6 +1,6 @@
 
 
-## Table of Contents
+## WebGL-Demo
 
 - [Updating to New Releases](#updating-to-new-releases)
 - [Sending Feedback](#sending-feedback)
