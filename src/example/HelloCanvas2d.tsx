@@ -8,7 +8,7 @@
             return;
         }
 
-        const ctx =canvas.getContext("2d");
+        const ctx:CanvasRenderingContext2D  =canvas.getContext("2d");
         ctx.fillStyle="red";
         ctx.fillRect(120,10,150,150);
 }
