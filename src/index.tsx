@@ -5,7 +5,8 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import { AppContainer } from 'react-hot-loader'; // 包裹根节点，想要渲染的内容
 const root=document.getElementById('root') ;
-const render = Component => {
+const render = (Component:any)  => {
+
   ReactDOM.hydrate(
       <AppContainer>
           <Component />
@@ -18,6 +19,8 @@ render(App);
   <App />,
   root as HTMLElement
 ); */
+
+
 
 if (module.hot) {
   module.hot.accept('./App', () => { // 当我们热更新的代码出现的时候，把App重新加载
