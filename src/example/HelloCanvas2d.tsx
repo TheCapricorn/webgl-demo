@@ -1,16 +1,21 @@
+import * as React from "react";
 
- export default function main():void{
-        // 获取canvas标签
-        const canvas:HTMLCanvasElement=  document.getElementById("example") as HTMLCanvasElement;
+export default class HelloCanvas2d extends React.PureComponent{
 
-        if(!canvas){
-            console.log('Failed to retrieve the <canvas> element.');
-            return;
-        }
+    render(){
+        return(
+            <div className="App">
+                <canvas id="example"/>
+            </div>
+        )
+    }
 
-        const ctx:CanvasRenderingContext2D=canvas.getContext("2d") as CanvasRenderingContext2D;
-        ctx.fillStyle="red";
-        ctx.fillRect(120,10,150,150);
+    componentDidMount(){
+           
+    }
+
 }
+
+
 
 

@@ -1,19 +1,26 @@
 import * as React from 'react';
+import {Route,BrowserRouter as Router} from "react-router-dom";
 import './App.css';
-import helloCanvas2d from "./example/HelloCanvas2d"
-
+import  routes from "./router";
 
 class App extends React.Component {
   public render() {
     return (
-      <div className="App">
-        <canvas id="example"/>
-      </div>
+      <Router>
+        
+        {
+          routes.map(({path,component},i)=>{
+            return(
+              <Route key={i} path={path}  component={component}/>
+            )
+          })
+        }
+      </Router>
     );
   }
 
   componentDidMount(){
-    helloCanvas2d();
+  
   }
 }
 
