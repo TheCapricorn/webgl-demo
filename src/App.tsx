@@ -1,15 +1,20 @@
 import * as React from 'react';
-import {Route,BrowserRouter as Router} from "react-router-dom";
+import {Route,BrowserRouter as Router,RouterChildContext} from "react-router-dom";
 import './App.css';
 import NavList from "./NavList"
 import  routes from "./router";
 
-const FadingRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-    <Component {...props}/>
-  )}/>
-)
 
+
+const FadingRoute = ({ component: Component, ...rest }:{component:any,path:string,routes:object[]}) =>{
+  const renders=(props:object) => (<Component {...props}/>)
+  return(
+    <Route {...rest} render={renders}/>
+  )
+
+}
+
+type FadingRoute=(props:{component:RouterChildContext,path:string,routes:Array<object>})=>React.ReactElement<object>
 
 
 
