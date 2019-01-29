@@ -1,16 +1,21 @@
 import HelloCanvas2d from "../example/HelloCanvas2d";
-import { ReactNode } from 'react';
+import * as React from "react";
 
 const routes:Array<routeType>=[
     {
-        path:"helloCanvas2d",
-        component:HelloCanvas2d
+        path:"/helloCanvas2d",
+        component:HelloCanvas2d,
+        name:"HelloCanvas2d",
     }
 ]
 
-interface routeType{
+export interface routeType{
     path:string,
-    component:ReactNode
+    name:string,
+    component:React.ComponentClass,
 }
+
+
+
 
 export default routes

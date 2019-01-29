@@ -5,7 +5,7 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import { AppContainer } from 'react-hot-loader'; // 包裹根节点，想要渲染的内容
 const root=document.getElementById('root') ;
-const render = (Component:any)  => {
+const render = (Component:React.ComponentClass)  => {
 
   ReactDOM.hydrate(
       <AppContainer>
