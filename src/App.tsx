@@ -7,7 +7,11 @@ import  routes from "./router";
 
 
 const FadingRoute = ({ component: Component, ...rest }:{component:any,path:string,routes:object[]}) =>{
-  const renders=(props:object) => (<Component {...props}/>)
+  const renders=(props:object) =>{
+    return(
+      <Component {...rest }/>
+    )
+  }
   return(
     <Route {...rest} render={renders}/>
   )
