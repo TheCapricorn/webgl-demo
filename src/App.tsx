@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {Route,BrowserRouter as Router,RouterChildContext} from "react-router-dom";
+import {Route,HashRouter as Router} from "react-router-dom";
 import './App.css';
 import NavList from "./NavList"
 import  routes from "./router";
 
 
 
-const FadingRoute = ({ component: Component, ...rest }:{component:any,path:string,routes:object[]}) =>{
+/* const FadingRoute = ({ component: Component, ...rest }:{component:any,path:string,routes:object[]}) =>{
   const renders=(props:object) =>{
     return(
       <Component {...rest }/>
@@ -16,11 +16,11 @@ const FadingRoute = ({ component: Component, ...rest }:{component:any,path:strin
     <Route {...rest} render={renders}/>
   )
 
-}
+} */
 
-type FadingRoute=(props:{component:RouterChildContext,path:string,routes:Array<object>})=>React.ReactElement<object>
+//type FadingRoute=(props:{component:RouterChildContext,path:string,routes:Array<object>})=>React.ReactElement<object>
 
-
+const render=()=>(<NavList routes={routes}/>)
 
 
 
@@ -37,7 +37,7 @@ class App extends React.Component {
               )
             })
           }
-          <FadingRoute path="/" routes={routes}  component={NavList} />
+          <Route path="/" exact={true} render={render}/>
         </div>
       
       </Router>

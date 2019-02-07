@@ -1,17 +1,26 @@
 import * as React from "react";
-import {Link} from "react-router-dom";
-import {routeType} from "./router"
+//import {routeType} from "./router";
+import { withRouter } from 'react-router';
+
 const {Fragment} =React;
-const NavList:NavList =({routes})=>{
-    console.log(routes)
+
+const NavList =({routes,history}:any)=>{
+    console.log(routes);
+
     return(
         <Fragment>
             {
-                routes.map(({path,name},i)=>{
+                routes.map(({path,name}:any,i:number)=>{
+                    //console.info(history)
+                const go=(e:any)=>{
+                    e.preventDefault();
+                    history.push(path);
+
+                }    
                 return(
-                <Link key={i} to={path}>{name}</Link>
+                <a key={i} onClick={go}>{name}</a>
                 )
-            })
+            })            
             }
         </Fragment>
        
@@ -20,9 +29,9 @@ const NavList:NavList =({routes})=>{
 
 
 
-type NavList =(P:{routes:Array<routeType>})=>React.ReactElement<any>
+//type NavList =(P:{routes:Array<routeType>})=>React.ReactElement<any>
 
 
-export default NavList
+export default  withRouter(NavList)
 
 

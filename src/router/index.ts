@@ -6,7 +6,7 @@ const routes:Array<routeType>=[
         path:"/helloCanvas2d",
         component:HelloCanvas2d,
         name:"HelloCanvas2d",
-    }
+    },
 ]
 
 export interface routeType{
