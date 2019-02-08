@@ -1,4 +1,5 @@
 import HelloCanvas2d from "../example/HelloCanvas2d";
+import HelloCanvas from "../example/HelloCanvas";
 import * as React from "react";
 
 const routes:Array<routeType>=[
@@ -6,6 +7,11 @@ const routes:Array<routeType>=[
         path:"/helloCanvas2d",
         component:HelloCanvas2d,
         name:"HelloCanvas2d",
+    },
+    {
+        path:"/helloCanvas",
+        component:HelloCanvas,
+        name:"helloCanvas",
     },
 ]
 
