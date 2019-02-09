@@ -9,6 +9,7 @@ const NavList =({routes,history}:any)=>{
 
     return(
         <Fragment>
+            <ul>
             {
                 routes.map(({path,name}:any,i:number)=>{
                     //console.info(history)
@@ -18,10 +19,11 @@ const NavList =({routes,history}:any)=>{
 
                 }    
                 return(
-                <a key={i} onClick={go}>{name}</a>
+                    <li key={i}><a  onClick={go}>{name}</a></li>
                 )
             })            
             }
+            </ul>
         </Fragment>
        
     )
