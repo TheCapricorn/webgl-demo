@@ -11,7 +11,7 @@ import  routes from "./router";
     return(
       <Component {...rest }/>
     )
-  }
+  }6
   return(
     <Route {...rest} render={renders}/>
   )
