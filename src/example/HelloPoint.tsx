@@ -25,8 +25,6 @@ const HelloPoint=()=>{
         }
 
         initShaders(gl,VSHADER_SOURCE,FSHADER_SOURCE);
-
-
         gl.clearColor(0.0,0.0,0.0,1.0);//清空绘图区域
         gl.clear(gl.COLOR_BUFFER_BIT);// 清空缓冲区域
         gl.drawArrays(gl.POINTS,0,1);
