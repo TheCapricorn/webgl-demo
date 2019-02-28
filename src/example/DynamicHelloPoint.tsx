@@ -13,9 +13,8 @@ const VSHADER_SOURCE=
 
 
 const FSHADER_SOURCE=
-    'uniform vec4 a_FragColor;\n'+
     'void main(){\n'+
-    'gl_FragColor=a_FragColor;\n'+
+    'gl_FragColor=vec4(0.0,0.0,0.0,1.0);\n'+
     '}';
 
 
@@ -29,8 +28,18 @@ const DynamicHelloPoint=()=>{
           return 
         }
         const gl:any=getWebGLContext(canvasRef.current,true);
-        initShaders(gl,VSHADER_SOURCE,FSHADER_SOURCE);
-        //gl.getAttribLocation(gl.program,'a_Position');
+        if(!initShaders(gl,VSHADER_SOURCE,FSHADER_SOURCE)){
+            return;
+        }
+       //指定清空<canvas>的颜色
+       gl.clearColor(1.0,0.0,0.0,1.0);
+       //清空<canvas>
+       gl.clear(gl.COLOR_BUFFER_BIT);
+        let a_Position=gl.getAttribLocation(gl.program,'a_Position');
+        let a_PointSize=gl.getAttribLocation(gl.program,'a_PointSize')
+        gl.vertexAttrib3f(a_Position,0.0,0.0,0.0);
+        gl.vertexAttrib1f(a_PointSize,10.0)
+        gl.drawArrays(gl.POINTS,0,1);    
     })
 
     return(
