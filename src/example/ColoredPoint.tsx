@@ -4,10 +4,10 @@ const {useRef,useState,useEffect} = React;
 
 const VSHADER_SOURCE=
       'attribute vec4 a_Position;\n'+
-      'attribute float a_PonitSize;\n'+
+      'attribute float a_PointSize;\n'+
       'void main(){\n'+
       'gl_Position=a_Position;\n'+
-      'gl_PointSize=a_PonitSize;\n'+
+      'gl_PointSize=a_PointSize;\n'+
       '}' 
 
 const FSHADER_SOURCE=
@@ -34,16 +34,16 @@ const ColorPoint=()=>{
             return;
         }
 
-        if(initShaders(gl,VSHADER_SOURCE,FSHADER_SOURCE)){
+        if(!initShaders(gl,VSHADER_SOURCE,FSHADER_SOURCE)){
             return;
         }
         gl.clearColor(0.0,0.0,0.0,1.0);
         gl.clear(gl.COLOR_BUFFER_BIT);
         const a_Position=gl.getAttribLocation(gl.program,'a_Position');
-        const a_PonitSize=gl.getAttribLocation(gl.program,'a_PointSize');
+        const a_PointSize=gl.getAttribLocation(gl.program,'a_PointSize');
         const u_FragColor=gl.getUniformLocation(gl.program,'u_FragColor');
         setaPosition(a_Position);
-        setaPointSize(a_PonitSize);
+        setaPointSize(a_PointSize);
         setuFragColor(u_FragColor);
         setGl(gl);
     }
@@ -61,8 +61,8 @@ const ColorPoint=()=>{
             return;
         }
         rect = current.getBoundingClientRect();
-        x=(x-rect.left-current.width/2)/current.width/2;
-        y=(y-rect.top-current.height/2)/current.height/2;
+        x=(x-rect.left-current.width/2)/(current.width/2);
+        y=(current.height/2-y-rect.top)/(current.height/2);
         currentPoints = [...gPoints,[x,y]]
         setgPoints( currentPoints );
 
@@ -88,7 +88,7 @@ const ColorPoint=()=>{
             const cPoint = gPoints[i];
             const cColor= gColors[i];
             contextGl.vertexAttrib3f(aPosition,cPoint[0],cPoint[1],0.0);
-            contextGl.vertexAttrib3f(aPointSize,10.0);
+            contextGl.vertexAttrib1f(aPointSize,10.0);
             contextGl.uniform4f(uFragColor,cColor[0],cColor[1],cColor[2],cColor[3])
             contextGl.drawArrays(contextGl.OPTIONS,0,1)
         }
