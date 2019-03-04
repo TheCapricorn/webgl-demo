@@ -50,10 +50,11 @@ const HelloTriangle = ()=>{
             return;
         }
         const u_FragColor= gl.getUniformLocation(gl.program,'u_FragColor');
+
         gl.uniform4f(u_FragColor,1.0,0.0,0.0,1.0);
         gl.clearColor(0.0,0.0,0.0,1.0);
         gl.clear(gl.COLOR_BUFFER_BIT);
-        gl.drawArrays(gl.OPTIONS,0,n);
+        gl.drawArrays(gl.TRIANGLES,0,n);
 
 
     })
