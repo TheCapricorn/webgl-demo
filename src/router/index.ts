@@ -2,7 +2,8 @@ import HelloCanvas2d from "../example/HelloCanvas2d";
 import HelloCanvas from "../example/HelloCanvas";
 import HelloPoint from "../example/HelloPoint";
 import DynamicHelloPoint from "@/example/DynamicHelloPoint";
-import  ColoredPoint from "@/example/ColoredPoint"
+import  ColoredPoint from "@/example/ColoredPoint";
+import HelloTriangle from "@/example/HelloTriangle";
 import * as React from "react";
 
 const routes:Array<any>=[
@@ -30,6 +31,11 @@ const routes:Array<any>=[
         path:"/ColoredPoint",
         component:ColoredPoint,
         name:"ColoredPoint",
+    },
+    {
+        path:"/HelloTriangle",
+        component:HelloTriangle,
+        name:"HelloTriangle",
     },
 ]
 
