@@ -4,6 +4,7 @@ import HelloPoint from "../example/HelloPoint";
 import DynamicHelloPoint from "@/example/DynamicHelloPoint";
 import  ColoredPoint from "@/example/ColoredPoint";
 import HelloTriangle from "@/example/HelloTriangle";
+import HelloMoveTriangle from "@/example/HelloMoveTriangle";
 import * as React from "react";
 
 const routes:Array<any>=[
@@ -36,6 +37,11 @@ const routes:Array<any>=[
         path:"/HelloTriangle",
         component:HelloTriangle,
         name:"HelloTriangle",
+    },
+    {
+        path:"/HelloMoveTriangle",
+        component:HelloMoveTriangle,
+        name:"HelloMoveTriangle",
     },
 ]
 
