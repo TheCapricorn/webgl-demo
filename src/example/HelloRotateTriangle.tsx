@@ -40,7 +40,7 @@ const HelloRotateTriangle = ()=>{
     const canvasRef=useRef(null);
 
     useEffect(()=>{
-        const angle= 90;
+        const angle= 90.0;
         const gl:any= getWebGLContext(canvasRef.current,true);
       
         if(!initShaders(gl,VSHADER_SOURCE,FSHADER_SOURCE)){
