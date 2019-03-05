@@ -4,9 +4,12 @@ const {useEffect,useRef} = React;
 
 const VSHADER_SOURCE=
     'attribute vec4 a_Position;\n'+
-    'uniform vec4 u_Move;\n'+
+    'uniform float u_CosB,u_SinB;\n'+
     'void main(){\n'+
-    'gl_Position=a_Position+u_Move;\n'+
+    'gl_Position.x=a_Position.x*u_CosB-a_Position.y*u_SinB;\n'+
+    'gl_Position.y= a_Position.x*u_SinB+a_Position.y*u_CosB;\n'+
+    'gl_Position.z=a_Position.z;\n'+
+    'gl_Position.w=1.0;\n'+
     '}';
 const FSHADER_SOURCE=
     'void main(){\n'+
@@ -33,10 +36,11 @@ const initVertexBuffers=function(gl:any){
 
 }
 
-const HelloMoveTriangle = ()=>{
+const HelloRotateTriangle = ()=>{
     const canvasRef=useRef(null);
 
     useEffect(()=>{
+        const angle= 90;
         const gl:any= getWebGLContext(canvasRef.current,true);
       
         if(!initShaders(gl,VSHADER_SOURCE,FSHADER_SOURCE)){
@@ -47,12 +51,14 @@ const HelloMoveTriangle = ()=>{
         if(n<0){
             return;
         }
-        const u_Move = gl.getUniformLocation(gl.program,'u_Move');
-        gl.uniform4f(u_Move,-0.3,-0.4,0.0,0.0)
+
+        const u_SinB = gl.getUniformLocation(gl.program,'u_SinB');
+        const u_CosB = gl.getUniformLocation(gl.program,'u_CosB');
+        gl.uniform1f(u_SinB,Math.sin(Math.PI*angle/180.0));
+        gl.uniform1f(u_CosB,Math.cos(Math.PI*angle/180.0));
         gl.clearColor(0.0,0.0,0.0,1.0);
         gl.clear(gl.COLOR_BUFFER_BIT);
         gl.drawArrays(gl.TRIANGLES,0,n);
-
     })
 
     return(
@@ -60,4 +66,4 @@ const HelloMoveTriangle = ()=>{
     )
 }
 
-export default HelloMoveTriangle
+export default HelloRotateTriangle
