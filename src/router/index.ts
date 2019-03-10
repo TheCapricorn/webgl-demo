@@ -6,6 +6,8 @@ import  ColoredPoint from "@/example/ColoredPoint";
 import HelloTriangle from "@/example/HelloTriangle";
 import HelloTranslateTriangle from "@/example/HelloTranslateTriangle";
 import HelloRotateTriangle from "@/example/HelloRotateTriangle";
+import HelloTranslateMat4 from "@/example/HelloTranslateMat4";
+import RotatingTranslate from "@/example/RotatingTranslate";
 import * as React from "react";
 
 const routes:Array<any>=[
@@ -48,6 +50,16 @@ const routes:Array<any>=[
         path:"/HelloRotateTriangle",
         component:HelloRotateTriangle,
         name:"HelloRotateTriangle",
+    },
+    {
+        path:"/HelloTranslateMat4",
+        component:HelloTranslateMat4,
+        name:"HelloTranslateMat4",
+    },
+    {
+        path:"/RotatingTranslate",
+        component:RotatingTranslate,
+        name:"RotatingTranslate",
     },
 ]
 
