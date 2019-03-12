@@ -14,11 +14,13 @@ const FSHADER_SOURCE=
 'gl_FragColor= vec4(1.0,0.0,0.0,0.0);\n'+
 '}';
 
+const ANGLE_STEP = 45.0;
+
 const initVertexBuffers=(gl:any)=>{
     const vertexBuffer=gl.createBuffer();
     const n=3;
     const vertices= new Float32Array([
-        -0.5,0.5,0.5,-0.5,0.5,0.5
+        0.0,0.5,-0.5,-0.5,0.5,-0.5
     ]); 
     if(!vertexBuffer){
         console.log('Failed to set positions of the vertices');
@@ -32,6 +34,10 @@ const initVertexBuffers=(gl:any)=>{
 
     return n;
 }
+
+
+
+
 
 const RotatingTranslate=()=>{
     const canvasRef= useRef(null);
@@ -53,9 +59,28 @@ const RotatingTranslate=()=>{
             return;
         }
         const modelMatrix= new Matrix4();
+        let currentAngle=0.0;
+        let g_last = Date.now();
+        const animate=function(angle:number,g_last:number){
+            const now = Date.now();
+            let elapsed = now-g_last;
+            g_last=now;
+            return  (angle+(ANGLE_STEP*elapsed)/1000.0)%360;
+        }
 
-        gl.clear(gl.COLOR_BUFFER_BIT);
-        gl.drawArrays(gl.TRIANGLES,0,n);
+        const draw=function(gl:any,n:number,currentAngle:number,modelMatrix:any, u_ModelMatrix:any){
+            modelMatrix.setRotate(currentAngle,0,0,1);
+            gl.uniformMatrix4fv(u_ModelMatrix,false,modelMatrix.elements);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            gl.drawArrays(gl.TRIANGLES,0,n);
+        }
+
+        const tick = function(){
+            currentAngle=animate(currentAngle,g_last);
+            draw(gl,n,currentAngle,modelMatrix,u_ModelMatrix);
+           /*  requestAnimationFrame(tick) */
+        }
+        tick();
     })
     return(
         <canvas ref={canvasRef} />
