@@ -61,10 +61,11 @@ const RotatingTranslate=()=>{
         const modelMatrix= new Matrix4();
         let currentAngle=0.0;
         let g_last = Date.now();
-        const animate=function(angle:number,g_last:number){
+        const animate=function(angle:number){
             const now = Date.now();
             let elapsed = now-g_last;
             g_last=now;
+        
             return  (angle+(ANGLE_STEP*elapsed)/1000.0)%360;
         }
 
@@ -76,9 +77,9 @@ const RotatingTranslate=()=>{
         }
 
         const tick = function(){
-            currentAngle=animate(currentAngle,g_last);
+            currentAngle=animate(currentAngle);
             draw(gl,n,currentAngle,modelMatrix,u_ModelMatrix);
-           /*  requestAnimationFrame(tick) */
+            requestAnimationFrame(tick);
         }
         tick();
     })

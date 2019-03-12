@@ -8,6 +8,7 @@ import HelloTranslateTriangle from "@/example/HelloTranslateTriangle";
 import HelloRotateTriangle from "@/example/HelloRotateTriangle";
 import HelloTranslateMat4 from "@/example/HelloTranslateMat4";
 import RotatingTranslate from "@/example/RotatingTranslate";
+import MultiAttributeSizeInterLeaved from "@/example/MultiAttributeSizeInterLeaved";
 import * as React from "react";
 
 const routes:Array<any>=[
@@ -60,6 +61,11 @@ const routes:Array<any>=[
         path:"/RotatingTranslate",
         component:RotatingTranslate,
         name:"RotatingTranslate",
+    },
+    {
+        path:"/MultiAttributeSizeInterLeaved",
+        component:MultiAttributeSizeInterLeaved,
+        name:"MultiAttributeSizeInterLeaved",
     },
 ]
 
