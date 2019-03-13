@@ -8,6 +8,7 @@ import HelloTranslateTriangle from "@/example/HelloTranslateTriangle";
 import HelloRotateTriangle from "@/example/HelloRotateTriangle";
 import HelloTranslateMat4 from "@/example/HelloTranslateMat4";
 import RotatingTranslate from "@/example/RotatingTranslate";
+import MultiAttributeColor from "@/example/MultiAttributeColor"
 import MultiAttributeSizeInterLeaved from "@/example/MultiAttributeSizeInterLeaved";
 import * as React from "react";
 
@@ -67,7 +68,13 @@ const routes:Array<any>=[
         component:MultiAttributeSizeInterLeaved,
         name:"MultiAttributeSizeInterLeaved",
     },
+    {
+        path:"/MultiAttributeColor",
+        component:MultiAttributeColor,
+        name:"MultiAttributeColor",
+    },
 ]
+
 
 export interface routeType{
     path:string,

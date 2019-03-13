@@ -3,18 +3,19 @@ import {getWebGLContext,initShaders} from "lib/cuon-utils";
 const {useRef,useEffect}=React;
 
 const VSHADER_SOURCE=
-'atrribute vec4 a_Position;\n'+
+'attribute vec4 a_Position;\n'+
 'attribute float a_PointSize;\n'+
 'void main(){\n'+
 'gl_Position=a_Position;\n'+
 'gl_PointSize=a_PointSize;\n'+
 '}';
 const FSHADER_SOURCE=
-'void main(){\n'+
-'gl_FragColor=vec4(1.0,0.0,0.0,0.0);\n'+    
-'}';
+    'void main(){\n'+
+    'gl_FragColor=vec4(1.0,0.0,0.0,1.0);\n'+
+    '}';
 
 const initVexterBuffer=(gl:any)=>{
+    const n=3;
     const vexterBuffer=gl.createBuffer();
     const verticesSize=new Float32Array([
         0.0,0.5,10.0,
@@ -30,6 +31,8 @@ const initVexterBuffer=(gl:any)=>{
     gl.vertexAttribPointer(a_PointSize,1,gl.FLOAT,false,FSIZE*3,FSIZE*2);
     gl.enableVertexAttribArray(a_Position);
     gl.enableVertexAttribArray(a_PointSize);
+
+    return n;
 };
 
 const MultiAttributeSizeInterLeaved=()=>{
@@ -39,10 +42,11 @@ const MultiAttributeSizeInterLeaved=()=>{
         if(!initShaders(gl,VSHADER_SOURCE,FSHADER_SOURCE)){
             return;
         }
-        const n= initVexterBuffer(gl)
+        const n= initVexterBuffer(gl);
 
-
-        
+        gl.clearColor(0.0,0.0,0.0,1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.drawArrays(gl.TRIANGLES,0,n)
     })
     return(
         <canvas ref={canvasRef} />
