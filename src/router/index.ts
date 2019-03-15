@@ -10,6 +10,7 @@ import HelloTranslateMat4 from "@/example/HelloTranslateMat4";
 import RotatingTranslate from "@/example/RotatingTranslate";
 import MultiAttributeColor from "@/example/MultiAttributeColor"
 import MultiAttributeSizeInterLeaved from "@/example/MultiAttributeSizeInterLeaved";
+import TexturedQuad from "@/example/TexturedQuad";
 import * as React from "react";
 
 const routes:Array<any>=[
@@ -72,6 +73,11 @@ const routes:Array<any>=[
         path:"/MultiAttributeColor",
         component:MultiAttributeColor,
         name:"MultiAttributeColor",
+    },
+    {
+        path:"/TexturedQuad",
+        component:TexturedQuad,
+        name:"TexturedQuad",
     },
 ]
 
