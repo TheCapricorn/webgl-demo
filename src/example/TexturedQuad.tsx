@@ -6,9 +6,14 @@ const SHADER_SOURCE=
 'attribute vec4 a_Position;\n'+
 'attribute vec2 a_TextCord;\n'+
 'varying vec2 v_TextCord;\n'+
-''
-;
+'void main(){\n'+
+'gl_Position=a_Position;\n'+
+'v_TextCord=a_TextCord;\n'+
+'}';
 const FSHADER_SOURCE=
+'#ifdef GL_ES\n' +
+'precision mediump float;\n' +
+'#endif\n' +
 '';
 
 const TexturedQuad=()=>{
