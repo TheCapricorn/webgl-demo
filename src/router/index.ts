@@ -1,5 +1,6 @@
 import HelloCanvas2d from "../example/HelloCanvas2d";
 import HelloCanvas from "../example/HelloCanvas";
+import HelloCanvas1 from "../example/HelloCanvas1";
 import HelloPoint from "../example/HelloPoint";
 import DynamicHelloPoint from "@/example/DynamicHelloPoint";
 import  ColoredPoint from "@/example/ColoredPoint";
@@ -13,6 +14,7 @@ import MultiAttributeSizeInterLeaved from "@/example/MultiAttributeSizeInterLeav
 import TexturedQuad from "@/example/TexturedQuad";
 import * as React from "react";
 
+
 const routes:Array<any>=[
     {
         path:"/helloCanvas2d",
@@ -23,6 +25,11 @@ const routes:Array<any>=[
         path:"/helloCanvas",
         component:HelloCanvas,
         name:"helloCanvas",
+    },
+    {
+        path:"/helloCanvas1",
+        component:HelloCanvas1,
+        name:"helloCanvas1",
     },
     {
         path:"/helloPoint",
