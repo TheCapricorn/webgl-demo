@@ -1,6 +1,12 @@
 import HelloCanvas2d from "../example/HelloCanvas2d";
 import HelloCanvas from "../example/HelloCanvas";
 import HelloCanvas1 from "../example/HelloCanvas1";
+import HelloCanvas2 from "../example/HelloCanvas2";
+import HelloCanvas3 from "../example/HelloCanvas3";
+import HelloCanvas4 from "../example/HelloCanvas4";
+import HelloCanvas5 from "../example/HelloCanvas5";
+import HelloCanvasLineJoin from "../example/HelloCanvasLineJoin";
+import HellocanvasLineDash from "../example/HellocanvasLineDash.js";
 import HelloPoint from "../example/HelloPoint";
 import DynamicHelloPoint from "@/example/DynamicHelloPoint";
 import  ColoredPoint from "@/example/ColoredPoint";
@@ -30,6 +36,36 @@ const routes:Array<any>=[
         path:"/helloCanvas1",
         component:HelloCanvas1,
         name:"helloCanvas1",
+    },
+    {
+        path:"/helloCanvas2",
+        component:HelloCanvas2,
+        name:"helloCanvas2",
+    },
+    {
+        path:"/HelloCanvas3",
+        component:HelloCanvas3,
+        name:"HelloCanvas3",
+    },
+    {
+        path:"/HelloCanvas4",
+        component:HelloCanvas4,
+        name:"HelloCanvas4",
+    },
+    {
+        path:"/HelloCanvas5",
+        component:HelloCanvas5,
+        name:"HelloCanvas5",
+    },
+    {
+        path:"/HelloCanvasLineJoin",
+        component:HelloCanvasLineJoin,
+        name:"HelloCanvasLineJoin",
+    },
+    {
+        path:"/HellocanvasLineDash",
+        component:HellocanvasLineDash,
+        name:"HellocanvasLineDash",
     },
     {
         path:"/helloPoint",
