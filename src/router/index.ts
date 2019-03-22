@@ -8,6 +8,7 @@ import HelloCanvas5 from "../example/HelloCanvas5";
 import HelloCanvasLineJoin from "../example/HelloCanvasLineJoin";
 import HellocanvasLineDash from "../example/HellocanvasLineDash.js";
 import HelloCanvasGradient from "../example/HelloCanvasGradient";
+import HelloCanvasRadialGradient from "../example/HelloCanvasRadialGradient";
 import HelloPoint from "../example/HelloPoint";
 import DynamicHelloPoint from "@/example/DynamicHelloPoint";
 import  ColoredPoint from "@/example/ColoredPoint";
@@ -72,6 +73,11 @@ const routes:Array<any>=[
         path:"/HelloCanvasGradient",
         component:HelloCanvasGradient,
         name:"HelloCanvasGradient",
+    },
+    {
+        path:"/HelloCanvasRadialGradient",
+        component:HelloCanvasRadialGradient,
+        name:"HelloCanvasRadialGradient",
     },
     {
         path:"/helloPoint",

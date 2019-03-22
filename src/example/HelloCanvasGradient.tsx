@@ -13,12 +13,10 @@ const HelloCanvasGradient =()=>{
         lingrad.addColorStop(1, '#fff');
         lingrad2.addColorStop(0.5, '#000');
         lingrad2.addColorStop(1, 'rgba(0,0,0,0)');
-
         ctx.fillStyle=lingrad;
         ctx.strokeStyle=lingrad2;
         ctx.fillRect(10,10,130,130);
         ctx.strokeRect(50,50,50,50);
-
     });
     return (<canvas ref={canvasRef}/>)
 }
