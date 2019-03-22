@@ -20,6 +20,7 @@ import RotatingTranslate from "@/example/RotatingTranslate";
 import MultiAttributeColor from "@/example/MultiAttributeColor"
 import MultiAttributeSizeInterLeaved from "@/example/MultiAttributeSizeInterLeaved";
 import TexturedQuad from "@/example/TexturedQuad";
+import LookAtTriangles from "@/example/LookAtTriangles";
 import * as React from "react";
 
 
@@ -133,6 +134,11 @@ const routes:Array<any>=[
         path:"/TexturedQuad",
         component:TexturedQuad,
         name:"TexturedQuad",
+    },
+    {
+        path:"/LookAtTriangles",
+        component:LookAtTriangles,
+        name:"LookAtTriangles",
     },
 ]
 
