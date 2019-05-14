@@ -21,6 +21,7 @@ import MultiAttributeColor from "@/example/MultiAttributeColor"
 import MultiAttributeSizeInterLeaved from "@/example/MultiAttributeSizeInterLeaved";
 import TexturedQuad from "@/example/TexturedQuad";
 import LookAtTriangles from "@/example/LookAtTriangles";
+import LookAtRotateTriangles from "@/example/LookAtRotateTriangles";
 import * as React from "react";
 
 
@@ -139,6 +140,11 @@ const routes:Array<any>=[
         path:"/LookAtTriangles",
         component:LookAtTriangles,
         name:"LookAtTriangles",
+    },
+    {
+        path:"/LookAtRotateTriangles",
+        component:LookAtRotateTriangles,
+        name:"LookAtRotateTriangles",
     },
 ]
 
