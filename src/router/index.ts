@@ -22,6 +22,7 @@ import MultiAttributeSizeInterLeaved from "@/example/MultiAttributeSizeInterLeav
 import TexturedQuad from "@/example/TexturedQuad";
 import LookAtTriangles from "@/example/LookAtTriangles";
 import LookAtRotateTriangles from "@/example/LookAtRotateTriangles";
+import LookAtTrianglesWithKey from "@/example/LookAtTrianglesWithKey";
 import * as React from "react";
 
 
@@ -145,6 +146,11 @@ const routes:Array<any>=[
         path:"/LookAtRotateTriangles",
         component:LookAtRotateTriangles,
         name:"LookAtRotateTriangles",
+    },
+    {
+        path:"/LookAtTrianglesWithKey",
+        component:LookAtTrianglesWithKey,
+        name:"LookAtTrianglesWithKey",
     },
 ]
 
