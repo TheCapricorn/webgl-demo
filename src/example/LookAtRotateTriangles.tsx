@@ -67,19 +67,13 @@ function main(canvas:React.RefObject<any>):void{
 
 function initVertexBuffers(gl:any){
     const verticesColors = new Float32Array([
-         0.0,  0.5,  -0.4,  0.4,  1.0,  0.4, // The back green one
-        -0.5, -0.5,  -0.4,  0.4,  1.0,  0.4,
+         1.2,  0.5,  -0.4,  0.4,  1.0,  0.4, // The back green one
+        -0.3, -0.5,  -0.4,  0.4,  1.0,  0.4,
          0.5, -0.5,  -0.4,  1.0,  0.4,  0.4,
 
-         0.5,  0.4,  -0.2,  1.0,  0.4,  0.4, // The middle yellow one
-        -0.5,  0.4,  -0.2,  1.0,  1.0,  0.4,
-         0.0, -0.6,  -0.2,  1.0,  1.0,  0.4,
-
-         0.0,  0.5,   0.0,  0.4,  0.4,  1.0,  // The front blue one
-        -0.5, -0.5,   0.0,  0.4,  0.4,  1.0,
-         0.5, -0.5,   0.0,  1.0,  0.4,  0.4
+       
     ]); 
-    const n = 9;
+    const n = 3;
 
     //创建缓冲区对象
     const verteColorBuffer = gl.createBuffer();

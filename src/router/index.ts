@@ -23,6 +23,7 @@ import TexturedQuad from "@/example/TexturedQuad";
 import LookAtTriangles from "@/example/LookAtTriangles";
 import LookAtRotateTriangles from "@/example/LookAtRotateTriangles";
 import LookAtTrianglesWithKey from "@/example/LookAtTrianglesWithKey";
+import OrthoView from "@/example/OrthoView";
 import * as React from "react";
 
 
@@ -152,6 +153,11 @@ const routes:Array<any>=[
         component:LookAtTrianglesWithKey,
         name:"LookAtTrianglesWithKey",
     },
+    {
+        path:"/OrthoView",
+        component:OrthoView,
+        name:"OrthoView",
+    }
 ]
 
 

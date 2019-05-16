@@ -1,10 +1,10 @@
 import * as React from "react";
-const {useEffect,useRef,Fragment} = React;
+const {useEffect,useRef,useState,Fragment} = React;
 import {getWebGLContext,initShaders} from "lib/cuon-utils";
 import { Matrix4 } from '@/lib/cuon-matrix';
 const VSHADER_SOURCE = 
     'attribute vec4 a_Position;\n'+
-    'atribute vec4 a_Color;\n'+
+    'attribute vec4 a_Color;\n'+
     'uniform mat4 u_ProjMatrix;\n'+
     'varying vec4 v_Color;\n'+
     'void main(){\n'+
@@ -17,8 +17,19 @@ const FSHADER_SOURCE =
     'void main(){\n'+
         'gl_FragColor=v_Color;\n'+
     '}';
+let g_near =0.0;
+let g_far = 0.5;
 
-function main(canvasRef:React.RefObject<any>):void{
+interface setObject {
+    setGNear:()=>void,
+    setGFar:()=>void,
+    setGL:()=>void,
+    setU_ProjMatrix:()=>void,
+    setProjMatrix:()=>void,
+    setVertex:()=>void,
+}
+
+function main(canvasRef:React.RefObject<any>,obj:setObject):void{
     const gl:any = getWebGLContext(canvasRef.current,true);
 
     if(!gl){
@@ -37,19 +48,33 @@ function main(canvasRef:React.RefObject<any>):void{
     }
 
     const u_ProjMatrix = gl.getUniformLocation(gl.program,'u_ProjMatrix');
-    const proMatrix = new Matrix4();
-    document.onkeydown=function(){
+    const projMatrix = new Matrix4();
 
+    document.onkeydown=function(ev){
+        keyDown(ev,gl,n,u_ProjMatrix,projMatrix);
+    }
+    draw(gl,n,u_ProjMatrix,projMatrix);
+}
+
+function keyDown(ev:any, gl:any, n:number, u_ProjMatrix:any, projMatrix:any){
+    switch(ev.keyCode){
+        case 39: g_near += 0.01; break; //right
+        case 37: g_near -= 0.01; break; //left
+        case 38: g_far += 0.01; break; //up
+        case 40: g_far -=0.01; break; //down
+        default: return;
     }
 
+    draw(gl,n,u_ProjMatrix,projMatrix);
 }
 
-function keyDown(){
-
-}
-
-function draw(){
-    
+function draw( gl:any, n:number, u_ProjMatrix:any, projMatrix:any){
+     //设置视点和视线
+    projMatrix.setOrtho(-1,1,-1,1,g_near,g_far);
+    //将视图矩阵传递给u_ViewMatrix变量
+    gl.uniformMatrix4fv(u_ProjMatrix,false,projMatrix.elements);
+    gl.clear(gl.COlOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, n);
 }
 
 function initVertexBuffers(gl:any){
@@ -116,15 +141,24 @@ function initVertexBuffers(gl:any){
 
 const OrthoView =()=>{
     const canvasRef: React.RefObject<any>= useRef(null);
+    const [gl,setGL] = useState(null);
+    const [vertex,setVertex] = useState(0);
+    const [u_ProjMatrix,setU_ProjMatrix] = useState(null);
+    const [projMatrix,setProjMatrix] = useState(null);
+    const [g_near,setGNear] = useState(0.0);
+    const [g_far,setGFar] = useState(0.5);
 
     useEffect(()=>{
-        main(canvasRef);
-    })
+        main(canvasRef,{setGNear,setGFar,setGL,setU_ProjMatrix,setProjMatrix,setVertex});
+    },[])
 
     return (
         <Fragment>
             <canvas  ref={canvasRef}/>
-            <div></div>
+            <div>
+                <p>near:{g_near}</p>
+                <p>far:{g_far}</p>
+            </div>
         </Fragment>
     )
 }
