@@ -1,6 +1,7 @@
 import * as React from "react";
 const {useEffect,useRef,Fragment} = React;
 import {getWebGLContext,initShaders} from "lib/cuon-utils";
+import { Matrix4 } from '@/lib/cuon-matrix';
 const VSHADER_SOURCE = 
     'attribute vec4 a_Position;\n'+
     'atribute vec4 a_Color;\n'+
@@ -30,8 +31,25 @@ function main(canvasRef:React.RefObject<any>):void{
         return;
     }
     const n = initVertexBuffers(gl);
+    if (n < 0) {
+        console.log('Failed to set the positions of the vertices');
+        return;
+    }
 
+    const u_ProjMatrix = gl.getUniformLocation(gl.program,'u_ProjMatrix');
+    const proMatrix = new Matrix4();
+    document.onkeydown=function(){
 
+    }
+
+}
+
+function keyDown(){
+
+}
+
+function draw(){
+    
 }
 
 function initVertexBuffers(gl:any){
