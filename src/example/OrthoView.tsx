@@ -21,15 +21,15 @@ let g_near =0.0;
 let g_far = 0.5;
 
 interface setObject {
-    setGNear:()=>void,
-    setGFar:()=>void,
-    setGL:()=>void,
-    setU_ProjMatrix:()=>void,
-    setProjMatrix:()=>void,
-    setVertex:()=>void,
+    setGNear:React.Dispatch<any>,
+    setGFar:React.Dispatch<any>,
+    setGL:React.Dispatch<any>,
+    setU_ProjMatrix:React.Dispatch<any>,
+    setProjMatrix:React.Dispatch<any>
+    setVertex:React.Dispatch<any>,
 }
 
-function main(canvasRef:React.RefObject<any>,obj:setObject):void{
+function main(canvasRef:React.RefObject<any>,obj:setObject,draw:()=>void):void{
     const gl:any = getWebGLContext(canvasRef.current,true);
 
     if(!gl){
@@ -51,17 +51,26 @@ function main(canvasRef:React.RefObject<any>,obj:setObject):void{
     const projMatrix = new Matrix4();
 
     document.onkeydown=function(ev){
-        keyDown(ev,gl,n,u_ProjMatrix,projMatrix);
+        keyDown(ev,gl,n,u_ProjMatrix,projMatrix,obj);
     }
-    draw(gl,n,u_ProjMatrix,projMatrix);
+    draw();
 }
 
-function keyDown(ev:any, gl:any, n:number, u_ProjMatrix:any, projMatrix:any){
+
+const add = function(n:number):number{
+    return n+0.01;
+}
+
+const dec = function(n:number):number{
+    return n-0.01;
+}
+
+function keyDown(ev:any, gl:any, n:number, u_ProjMatrix:any, projMatrix:any,obj:setObject){
     switch(ev.keyCode){
-        case 39: g_near += 0.01; break; //right
-        case 37: g_near -= 0.01; break; //left
-        case 38: g_far += 0.01; break; //up
-        case 40: g_far -=0.01; break; //down
+        case 39: obj.setGNear(add) ; break; //right
+        case 37: obj.setGNear(dec) ;break //left
+        case 38: obj.setGNear(add); break; //up
+        case 40: obj.setGNear(dec); break; //down
         default: return;
     }
 
@@ -141,15 +150,24 @@ function initVertexBuffers(gl:any){
 
 const OrthoView =()=>{
     const canvasRef: React.RefObject<any>= useRef(null);
-    const [gl,setGL] = useState(null);
+    const [gl,setGL]:Array<any> = useState(null);
     const [vertex,setVertex] = useState(0);
     const [u_ProjMatrix,setU_ProjMatrix] = useState(null);
-    const [projMatrix,setProjMatrix] = useState(null);
+    const [projMatrix,setProjMatrix]:Array<any> = useState(null);
     const [g_near,setGNear] = useState(0.0);
     const [g_far,setGFar] = useState(0.5);
 
+
     useEffect(()=>{
-        main(canvasRef,{setGNear,setGFar,setGL,setU_ProjMatrix,setProjMatrix,setVertex});
+        const draw = function(){
+            //设置视点和视线
+           projMatrix.setOrtho(-1,1,-1,1,g_near,g_far);
+           //将视图矩阵传递给u_ViewMatrix变量
+           gl.uniformMatrix4fv(u_ProjMatrix,false,projMatrix.elements);
+           gl.clear(gl.COlOR_BUFFER_BIT);
+           gl.drawArrays(gl.TRIANGLES, 0, vertex);
+       }
+        main(canvasRef,{setGNear,setGFar,setGL,setU_ProjMatrix,setProjMatrix,setVertex},draw);
     },[])
 
     return (
