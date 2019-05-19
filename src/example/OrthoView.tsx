@@ -1,5 +1,5 @@
 import * as React from "react";
-const {useEffect,useRef,useState,Fragment} = React;
+const {useEffect,useRef,useState,useCallback,Fragment} = React;
 import {getWebGLContext,initShaders} from "lib/cuon-utils";
 import { Matrix4 } from '@/lib/cuon-matrix';
 const VSHADER_SOURCE = 
@@ -17,8 +17,7 @@ const FSHADER_SOURCE =
     'void main(){\n'+
         'gl_FragColor=v_Color;\n'+
     '}';
-let g_near =0.0;
-let g_far = 0.5;
+
 
 interface setObject {
     setGNear:React.Dispatch<any>,
@@ -29,7 +28,7 @@ interface setObject {
     setVertex:React.Dispatch<any>,
 }
 
-function main(canvasRef:React.RefObject<any>,obj:setObject,draw:()=>void):void{
+function main(canvasRef:React.RefObject<any>,obj:setObject){
     const gl:any = getWebGLContext(canvasRef.current,true);
 
     if(!gl){
@@ -53,7 +52,14 @@ function main(canvasRef:React.RefObject<any>,obj:setObject,draw:()=>void):void{
     document.onkeydown=function(ev){
         keyDown(ev,gl,n,u_ProjMatrix,projMatrix,obj);
     }
-    draw();
+    obj.setGL(gl);
+    obj.setVertex(n);
+    obj.setProjMatrix(projMatrix);
+    obj.setU_ProjMatrix(u_ProjMatrix);
+
+    return function(){
+        document.onkeydown=null;
+    }
 }
 
 
@@ -69,22 +75,15 @@ function keyDown(ev:any, gl:any, n:number, u_ProjMatrix:any, projMatrix:any,obj:
     switch(ev.keyCode){
         case 39: obj.setGNear(add) ; break; //right
         case 37: obj.setGNear(dec) ;break //left
-        case 38: obj.setGNear(add); break; //up
-        case 40: obj.setGNear(dec); break; //down
+        case 38: obj.setGFar(add); break; //up
+        case 40: obj.setGFar(dec); break; //down
         default: return;
     }
 
-    draw(gl,n,u_ProjMatrix,projMatrix);
+   
 }
 
-function draw( gl:any, n:number, u_ProjMatrix:any, projMatrix:any){
-     //设置视点和视线
-    projMatrix.setOrtho(-1,1,-1,1,g_near,g_far);
-    //将视图矩阵传递给u_ViewMatrix变量
-    gl.uniformMatrix4fv(u_ProjMatrix,false,projMatrix.elements);
-    gl.clear(gl.COlOR_BUFFER_BIT);
-    gl.drawArrays(gl.TRIANGLES, 0, n);
-}
+
 
 function initVertexBuffers(gl:any){
     const vertexColor = new Float32Array([
@@ -156,19 +155,29 @@ const OrthoView =()=>{
     const [projMatrix,setProjMatrix]:Array<any> = useState(null);
     const [g_near,setGNear] = useState(0.0);
     const [g_far,setGFar] = useState(0.5);
+    const draw = useCallback(function(projMatrix,g_near,g_far,u_ProjMatrix,gl,vertex){
+        //设置视点和视线
+        console.info(projMatrix)
+       projMatrix.setOrtho(-1,1,-1,1,g_near,g_far);
+       //将视图矩阵传递给u_ViewMatrix变量
+       gl.uniformMatrix4fv(u_ProjMatrix,false,projMatrix.elements);
+       gl.clear(gl.COlOR_BUFFER_BIT);
+       gl.drawArrays(gl.TRIANGLES, 0, vertex);
+   },[])
 
-
+    useEffect(()=>{ 
+        console.log('update',canvasRef.current);
+        return main(canvasRef,{setGNear,setGFar,setGL,setU_ProjMatrix,setProjMatrix,setVertex});
+    },[]);
+    
     useEffect(()=>{
-        const draw = function(){
-            //设置视点和视线
-           projMatrix.setOrtho(-1,1,-1,1,g_near,g_far);
-           //将视图矩阵传递给u_ViewMatrix变量
-           gl.uniformMatrix4fv(u_ProjMatrix,false,projMatrix.elements);
-           gl.clear(gl.COlOR_BUFFER_BIT);
-           gl.drawArrays(gl.TRIANGLES, 0, vertex);
-       }
-        main(canvasRef,{setGNear,setGFar,setGL,setU_ProjMatrix,setProjMatrix,setVertex},draw);
-    },[])
+        console.log(g_near)
+        if(!projMatrix || !u_ProjMatrix || !vertex || !gl){
+            return;
+        }
+        
+        draw(projMatrix,g_near,g_far,u_ProjMatrix,gl,vertex)
+    },[projMatrix,g_near,g_far,u_ProjMatrix,gl,vertex])
 
     return (
         <Fragment>
