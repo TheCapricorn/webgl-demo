@@ -167,7 +167,11 @@ export interface routeType{
     component:React.ComponentClass | React.SFCElement<any>,
 }
 
+enum Color {Red,Green=2,Blue=3};
+let c:Color = Color.Red;
+console.log(c);
 
 
 
 export default routes
+

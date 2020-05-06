@@ -18,7 +18,6 @@ const FSHADER_SOURCE=
     '}';
 
 
-
 const DynamicHelloPoint=()=>{
     const canvasRef=useRef(null);
     
