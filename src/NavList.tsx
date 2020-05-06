@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 const {Fragment} =React;
 
 const NavList =({routes,history}:any)=>{
-    console.log(routes);
+    console.log(routes,1111);
 
     return(
         <Fragment>
